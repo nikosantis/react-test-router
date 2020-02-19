@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
   "scripts": {
@@ -17,7 +18,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "parser": "babel-eslint",
+    "extends": [
+      "./node_modules/standard/eslintrc.json",
+      "react-app"
+    ]
   },
   "browserslist": {
     "production": [
@@ -29,6 +34,14 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
+  },
+  "standard": {
+    "ignore": [
+      "build/*"
     ]
   }
 }
