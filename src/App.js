@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import './App.css'
 
 const Home = () => (
@@ -7,29 +7,11 @@ const Home = () => (
 )
 
 const Perfil = () => {
-  return isAuth
-    ? <h1>Bienvenido a tu perfil</h1>
-    : (
-      <Redirect
-        // to='/login'
-        to={{
-          pathname: '/login',
-          state: {
-            message: 'Debes de hacer login para acceder a tu perfil'
-          }
-        }}
-      />
-    )
+  return <h1>Perfil</h1>
 }
 
-const isAuth = false
-
-const Login = ({ location }) => {
-  if (location.state) {
-    return <h2>{location.state.message}</h2>
-  }
-
-  return <h2>Login</h2>
+const Login = () => {
+  return <h1>Login</h1>
 }
 
 const Navegation = () => (
@@ -40,14 +22,51 @@ const Navegation = () => (
   </nav>
 )
 
+const NavegacionImperativa = ({ history }) => {
+  console.log(history)
+
+  return (
+    <div>
+      <button onClick={history.goBack}>
+        Atras
+      </button>
+
+      <button onClick={history.goForward}>
+        Adelante
+      </button>
+
+      <button onClick={() => {
+        history.go(2)
+      }}
+      >
+        Go 2
+      </button>
+
+      <button onClick={() => {
+        history.push('/perfil')
+      }}
+      >
+        go Perfil
+      </button>
+
+      <button onClick={() => {
+        history.replace('/perfil')
+      }}
+      >
+        go Perfil
+      </button>
+    </div>
+  )
+}
+
 const App = () => {
   return (
     <BrowserRouter>
       <Navegation />
+      <Route render={NavegacionImperativa} />
       <Route path='/' exact render={Home} />
       <Route path='/perfil' render={Perfil} />
       <Route path='/login' render={Login} />
-      <Redirect from='/p' to='/perfil' />
     </BrowserRouter>
   )
 }
