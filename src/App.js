@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom'
+import queryString from 'query-string'
 
 import './App.css'
 
@@ -55,6 +56,11 @@ const Navigation = () => (
     >
       Productos
     </NavLink>
+    <NavLink
+      to='/ropa'
+    >
+      Ropa
+    </NavLink>
   </nav>
 )
 
@@ -70,6 +76,19 @@ const ProductosCategoria = ({ match }) => {
           )
           : ''
       }
+    </div>
+  )
+}
+
+const Ropa = ({ location }) => {
+  // const query = new URLSearchParams(location.search)
+  // const color = query.get('color')
+  // const talla = query.get('talla')
+  const query = queryString.parse(location.search)
+  return (
+    <div>
+      <h1>Ropa</h1>
+      <h2>Search => Color: {query.color} Talla: {query.talla}</h2>
     </div>
   )
 }
@@ -102,6 +121,10 @@ const App = () => {
       <Route
         path='/productos/:categoria/:id?'
         render={ProductosCategoria}
+      />
+      <Route
+        path='/ropa'
+        render={Ropa}
       />
     </BrowserRouter>
   )
